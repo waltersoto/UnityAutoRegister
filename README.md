@@ -1,7 +1,7 @@
 # UnityAutoRegister
 
-This library will auto-register types using the Unity Container. There are not many configuration options since the main reason I am using
-this is to inject dependencies in ASP.NET MVC controllers (similar usage to the example below). 
+If you use Unity for dependency injection in .NET; this library will auto-register types decorated with a "Implement" attribute.
+There are not many configuration options since the main reason I am using this is to inject dependencies in ASP.NET MVC controllers (similar usage to the example below). 
 
 ###Usage
 
