@@ -15,13 +15,8 @@ namespace UnityContainerWeb
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-           
-
-            AutoRegister.AllInMvc(new UnityContainer());
-           
-
-
+             
+            AutoRegister.AllInMvc(new UnityContainer()); 
         }
     }
 }

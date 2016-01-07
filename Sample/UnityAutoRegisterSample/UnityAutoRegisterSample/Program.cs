@@ -30,9 +30,7 @@ namespace UnityAutoRegisterSample
             }
 
             Console.ReadLine();
-
-
-
+             
         }
     }
 }
