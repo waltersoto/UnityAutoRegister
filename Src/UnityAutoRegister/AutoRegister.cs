@@ -15,6 +15,7 @@ namespace UnityAutoRegister
             DependencyResolver.SetResolver(new ControllerDependencyResolver(container));
         }
 
+   
         public static void All(IUnityContainer container)
         {
             List<Assembly> list = AppDomain.CurrentDomain.GetAssemblies().ToList();
@@ -30,7 +31,8 @@ namespace UnityAutoRegister
                     ImplementAttribute custom = to.GetCustomAttributes<ImplementAttribute>().SingleOrDefault();
                     if (custom != null)
                     {
-                        container.RegisterType(custom.FromType, to);
+                        container.RegisterType(custom.FromType, to,WithName.Default(to), WithLifetime.ContainerControlled(to));
+                       
                     }
 
                 }

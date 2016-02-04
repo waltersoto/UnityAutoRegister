@@ -10,7 +10,7 @@ using System.Web;
 
 namespace UnityAutoRegister
 {
-    public class ControllerDependencyResolver : IDependencyResolver
+    public class ControllerDependencyResolver : IDependencyResolver, IDisposable
     {
          
 
@@ -18,14 +18,14 @@ namespace UnityAutoRegister
 
         public ControllerDependencyResolver(IUnityContainer container)
         { 
-            this.container = container;
+            this.container = container; 
         }
 
 
         public object GetService(Type serviceType)
         {
             if (typeof(IController).IsAssignableFrom(serviceType))
-            { 
+            {
                 return container.Resolve(serviceType);
             }
 
@@ -46,7 +46,26 @@ namespace UnityAutoRegister
 
         }
 
-        
+        private bool disposed = false;
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+  
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                container?.Dispose();
+            }
+
+            disposed = true;
+        }
 
     }
 }
