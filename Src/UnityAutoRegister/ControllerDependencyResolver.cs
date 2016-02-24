@@ -24,6 +24,7 @@ namespace UnityAutoRegister
 
         public object GetService(Type serviceType)
         {
+            if (container == null) return null;
             try
             {
                 if (typeof(IController).IsAssignableFrom(serviceType))

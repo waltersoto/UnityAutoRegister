@@ -11,8 +11,10 @@ namespace UnityAutoRegister
     {
         public static void AllInMvc(IUnityContainer container)
         {
-            All(Container);
-            DependencyResolver.SetResolver(new ControllerDependencyResolver(Container));
+            if(container == null) return;
+            
+            All(container);
+            DependencyResolver.SetResolver(new ControllerDependencyResolver(container));
         }
 
        
@@ -20,6 +22,7 @@ namespace UnityAutoRegister
 
         public static void All(IUnityContainer c)
         {
+            if (c == null) return;
             if (Container == null)
             {
                 Container = c;
