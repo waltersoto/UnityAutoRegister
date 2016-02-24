@@ -11,13 +11,20 @@ namespace UnityAutoRegister
     {
         public static void AllInMvc(IUnityContainer container)
         {
-            All(container);
-            DependencyResolver.SetResolver(new ControllerDependencyResolver(container));
+            All(Container);
+            DependencyResolver.SetResolver(new ControllerDependencyResolver(Container));
         }
 
-   
-        public static void All(IUnityContainer container)
+       
+        private static IUnityContainer Container { set; get; }
+
+        public static void All(IUnityContainer c)
         {
+            if (Container == null)
+            {
+                Container = c;
+            }
+
             List<Assembly> list = AppDomain.CurrentDomain.GetAssemblies().ToList();
 
             foreach (Assembly assembly in list)
@@ -31,7 +38,7 @@ namespace UnityAutoRegister
                     ImplementAttribute custom = to.GetCustomAttributes<ImplementAttribute>().SingleOrDefault();
                     if (custom != null)
                     {
-                        container.RegisterType(custom.FromType, to,WithName.Default(to), WithLifetime.ContainerControlled(to));
+                        Container.RegisterType(custom.FromType, to,WithName.Default(to), WithLifetime.ContainerControlled(to));
                        
                     }
 

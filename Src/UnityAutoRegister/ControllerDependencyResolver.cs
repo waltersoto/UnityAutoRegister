@@ -24,11 +24,18 @@ namespace UnityAutoRegister
 
         public object GetService(Type serviceType)
         {
-            if (typeof(IController).IsAssignableFrom(serviceType))
+            try
             {
-                return container.Resolve(serviceType);
+                if (typeof(IController).IsAssignableFrom(serviceType))
+                {
+                    return container.Resolve(serviceType);
+                }
             }
-
+            catch
+            {
+                // ignored
+            }
+            
             return container.IsRegistered(serviceType) ? container.Resolve(serviceType) : null;
         }
 
